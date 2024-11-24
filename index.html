@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Лабораторна робота №7</title>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+			background-color: #f68689
+        }
+        #tabs {
+            margin-top: 20px;
+        }
+        #slider {
+            margin-top: 20px;
+        }
+        #gallery {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        #gallery img {
+            width: 150px;
+            height: 100px;
+            cursor: move;
+        }
+    </style>
+</head>
+<body>
+    <h1>Лабораторна робота №7</h1>
+    <h2>Демонстрація використання jQuery UI</h2>
+
+    <div id="tabs">
+        <ul>
+            <li><a href="#tab-1">Головна</a></li>
+            <li><a href="#tab-2">Про нас</a></li>
+            <li><a href="#tab-3">Контакти</a></li>
+        </ul>
+        <div id="tab-1">
+            <p>Ласкаво прошу на мою тестову сторінку!</p>
+        </div>
+        <div id="tab-2">
+            <p>На цій сторінці я використовую можливості jQuery UI.</p>
+        </div>
+        <div id="tab-3">
+            <p>Зв'язатися зі мною можна за телефоном: <strong>+380******273</strong></p>
+        </div>
+    </div>
+
+    <div id="slider"></div>
+    <p>Значення слайдера: <span id="slider-value">50</span></p>
+
+    <div id="gallery">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRjsBbs3Ep5NYTMtKVUIPObrXhWkZ2sw583UA&s" alt="Зображення 1">
+        <img src="https://st2.depositphotos.com/2810953/8397/i/450/depositphotos_83973906-stock-photo-psycho-floral-pattern-generated-texture.jpg" alt="Зображення 2">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ9hlzjhpbucqtmF58AdOk7J-p0_YNdWyV3BvY8z9WAj1_dEa0L4JuVpNc9Woyzdlb3alE&usqp=CAU" alt="Зображення 3">
+        <img src="https://media.istockphoto.com/id/1689656337/ru/%D0%B2%D0%B5%D0%BA%D1%82%D0%BE%D1%80%D0%BD%D0%B0%D1%8F/groovy-%D0%BF%D1%81%D0%B8%D1%85%D0%BE%D0%B4%D0%B5%D0%BB%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B0%D1%8F-%D0%B2%D0%BE%D0%BB%D0%BD%D0%B8%D1%81%D1%82%D0%B0%D1%8F-%D1%88%D0%B0%D1%85%D0%BC%D0%B0%D1%82%D0%BD%D0%B0%D1%8F-%D0%B4%D0%BE%D1%81%D0%BA%D0%B0-%D0%B1%D0%B5%D1%81%D1%88%D0%BE%D0%B2%D0%BD%D1%8B%D0%B9-%D1%83%D0%B7%D0%BE%D1%80-%D1%85%D0%B8%D0%BF%D0%BF%D0%B8-%D1%81%D0%BA%D1%80%D1%83%D1%82%D0%B8%D0%BB-%D0%B4%D0%B6%D0%B8%D0%BD%D0%B3%D0%B0%D0%BC.jpg?s=1024x1024&w=is&k=20&c=LToI3k05QGpQrEgjExmkMo0WUs2wwHK0Tozmj_uEs5E=" alt = "Зображення 4">
+		</div>
+
+    <button id="open-dialog">Показати повідомлення</button>
+    <div id="dialog" title="Повідомлення">
+        <p>Це діалогове вікно демонструє можливості jQuery UI.</p>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
+    <script>
+        $(function() {
+            $("#tabs").tabs();
+        });
+
+        $(function() {
+            $("#slider").slider({
+                value: 50,
+                min: 0,
+                max: 100,
+                slide: function(event, ui) {
+                    $("#slider-value").text(ui.value);
+                }
+            });
+        });
+
+        $(function() {
+            $("#gallery img").draggable();
+        });
+
+        $(function() {
+            $("#dialog").dialog({
+                autoOpen: false,
+                modal: true,
+                buttons: {
+                    "Закрити": function() {
+                        $(this).dialog("close");
+                    }
+                }
+            });
+
+            $("#open-dialog").on("click", function() {
+                $("#dialog").dialog("open");
+            });
+        });
+    </script>
+</body>
+</html>
